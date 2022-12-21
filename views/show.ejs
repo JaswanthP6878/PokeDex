@@ -1,0 +1,14 @@
+<% layout('./layouts/boilerplate') -%>
+    <h1><%= pokemon.name %> </h1>
+    <img src="<%= pokemon.image %>" alt="pokemon image">
+    <ul>
+        <% for (let data of pokemon.types) { %> 
+                <li><%= data.type.name %> </li>
+        <% } %> 
+    </ul>
+
+
+           <!-- <li>
+                <a href="/pokemons/<%= pokemon._id %>"><%= pokemon.name %></a>
+    
+            </li>     -->
