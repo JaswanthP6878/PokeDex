@@ -8,6 +8,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 
+
+import Pokedex from 'pokedex-promise-v2';
+const P = new Pokedex();
+
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -24,13 +28,14 @@ import pokemonModel from './models/pokemon.js';
 app.get('/pokemons', async (req, res) => {
     const data = await pokemonModel.find();
     res.render('index', { data });
-    // res.send('index page');
 })
 
 app.get('/pokemons/:id', async (req, res) => {
     const { id } =  req.params;
     const pokemon = await pokemonModel.findById(id);
-    res.render('show', { pokemon });
+    const pokeData = await P.getPokemonByName(pokemon.name);
+    // console.log(pokeData);
+    res.render('show', { pokemon ,pokeData});
 })
 
 app.listen(3000,  () =>{

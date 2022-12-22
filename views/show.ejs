@@ -4,7 +4,7 @@
             <div style = "border-radius: 20px;" class="card">
                 <img style = "max-width: 200px; max-height: 200px; margin: auto;"src="<%= pokemon.image %>" class="card-img-top img-fluid" alt="pokemon image">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="card-title text-center">
                         <%= pokemon.name %>
                     </h5>
                 </div>
@@ -22,13 +22,20 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-9 border">
+        <div class="col-9 border pt-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-9">.col-9</div>
-                    <div class="col-4">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
-                    <div class="col-6">.col-6<br>Subsequent columns continue along the new line.</div>
+                    <div class="col-4 border text-center">
+                    Stats:
+                    <ul class = "list-group list-group-flush mt-1">
+                    <% for (let s of pokeData.stats) { %> 
+                       
+                            <li class =" list-group-item"><span><%= s.stat.name %> : <%= s.base_stat %> </span></li>
+                        
+                        <% } %> 
+                    </ul>
+                    </div>
+                    <div class="col-6">....<br>......</div>
                   </div>
             </div>
         </div>
