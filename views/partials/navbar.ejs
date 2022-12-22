@@ -1,8 +1,8 @@
 <nav class="navbar  navbar-light bg-danger text-white">
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="/pokemons">PokeDexTest</a>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form action = '/pokemons/search' method = "get" class="d-flex">
+          <input  name = "pokename" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-danger bg-white" type="submit">Search</button>
         </form>
       </div>
