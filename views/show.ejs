@@ -1,14 +1,26 @@
 <% layout('./layouts/boilerplate') -%>
-    <h1><%= pokemon.name %> </h1>
-    <img src="<%= pokemon.image %>" alt="pokemon image">
-    <ul>
-        <% for (let data of pokemon.types) { %> 
-                <li><%= data.type.name %> </li>
-        <% } %> 
-    </ul>
-
-
-           <!-- <li>
-                <a href="/pokemons/<%= pokemon._id %>"><%= pokemon.name %></a>
-    
-            </li>     -->
+    <div class="row mt-4">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <img style = "max-width: 300px; max-height: 300px; margin: auto;"src="<%= pokemon.image %>" class="card-img-top img-fluid" alt="pokemon image">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= pokemon.name %>
+                    </h5>
+                    <p class="card-text">Details about pokemon placeholder.</p>
+                </div>
+                <div class="card-header">
+                    Types
+                </div>
+                <div>
+                    <ul class="list-group list-group-flush">
+                        <% for (let data of pokemon.types) { %>
+                            <li class="list-group-item">
+                                <%= data.type.name %>
+                            </li>
+                            <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
