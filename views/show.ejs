@@ -1,13 +1,12 @@
 <% layout('./layouts/boilerplate') -%>
     <div class="row mt-4">
-        <div class="col-6 offset-3">
-            <div class="card">
-                <img style = "max-width: 300px; max-height: 300px; margin: auto;"src="<%= pokemon.image %>" class="card-img-top img-fluid" alt="pokemon image">
+        <div class="col-3 ml-2 border-end">
+            <div style = "border-radius: 20px;" class="card">
+                <img style = "max-width: 200px; max-height: 200px; margin: auto;"src="<%= pokemon.image %>" class="card-img-top img-fluid" alt="pokemon image">
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= pokemon.name %>
                     </h5>
-                    <p class="card-text">Details about pokemon placeholder.</p>
                 </div>
                 <div class="card-header">
                     Types
@@ -21,6 +20,16 @@
                             <% } %>
                     </ul>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-9 border">
+            <div class="container">
+                <div class="row">
+                    <div class="col-9">.col-9</div>
+                    <div class="col-4">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+                    <div class="col-6">.col-6<br>Subsequent columns continue along the new line.</div>
+                  </div>
             </div>
         </div>
     </div>

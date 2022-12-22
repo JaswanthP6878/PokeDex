@@ -4,7 +4,8 @@ const fetchPokemon = async () => {
     // import Pokedex from 'pokedex-promise-v2';
     try {
     const data = await P.getPokemonByName('ivysaur');
-    console.log(data);
+    const {stats } = data;
+    console.log(stats);
     } catch(e) {
         console.log(e);
     } 
