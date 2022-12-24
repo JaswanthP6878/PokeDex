@@ -53,22 +53,28 @@ app.get('/pokemons/:id', async (req, res) => {
     const pokemon = await pokemonModel.findById(id);
     const pokeData = await P.getPokemonByName(pokemon.name);
     // console.log(pokeData);
-    res.render('show', { pokemon ,pokeData});
+    // res.render('show', { pokemon ,pokeData});
+    res.send(pokeData);
 })
+
 app.post('/pokemon/:name', async (req, res) => {
-    // console.log(req.params.name);
+    try{
     const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.params.name}/`);
-            const {name, sprites, types } = await data.json();
-            const image = sprites.other.dream_world.front_default;
-            const p =  new pokemonModel({
-                name: name,
-                image: image,
-                types: types
-            })
-            const result = await p.save();
-            console.log(p);
-        res.send('added to database');
-    res.send('not found');
+    const pokemon = await data.json();
+    const {name, sprites, types } = pokemon;
+    const image = sprites.other.dream_world.front_default;
+    const p =  new pokemonModel({
+        name: name,
+        image: image,
+        types: types
+    })
+    const result = await p.save();
+    console.log(p);
+    res.send('added to database');
+    } catch(e) {
+        res.send('not found');
+    }   
+    
 })
 
 app.listen(3000,  () =>{
