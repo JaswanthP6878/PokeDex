@@ -53,8 +53,8 @@ app.get('/pokemons/:id', async (req, res) => {
     const pokemon = await pokemonModel.findById(id);
     const pokeData = await P.getPokemonByName(pokemon.name);
     // console.log(pokeData);
-    // res.render('show', { pokemon ,pokeData});
-    res.send(pokeData);
+    res.render('show', { pokemon ,pokeData});
+    // res.send(pokeData); testing the pokedata;
 })
 
 app.post('/pokemon/:name', async (req, res) => {
