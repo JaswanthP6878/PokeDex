@@ -5,6 +5,7 @@ import engine from 'ejs-mate';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from 'body-parser';
+import fetch from 'node-fetch';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -38,7 +39,7 @@ app.get('/pokemons/search', async (req, res) => {
         res.redirect(`/pokemons/${pokemon._id}`);
     }
     else {
-        res.send('pokemon not found');
+        res.render('notFound', { pokename });
     }
 })
 
@@ -53,6 +54,21 @@ app.get('/pokemons/:id', async (req, res) => {
     const pokeData = await P.getPokemonByName(pokemon.name);
     // console.log(pokeData);
     res.render('show', { pokemon ,pokeData});
+})
+app.post('/pokemon/:name', async (req, res) => {
+    // console.log(req.params.name);
+    const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.params.name}/`);
+            const {name, sprites, types } = await data.json();
+            const image = sprites.other.dream_world.front_default;
+            const p =  new pokemonModel({
+                name: name,
+                image: image,
+                types: types
+            })
+            const result = await p.save();
+            console.log(p);
+        res.send('added to database');
+    res.send('not found');
 })
 
 app.listen(3000,  () =>{

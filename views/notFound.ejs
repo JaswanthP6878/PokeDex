@@ -1,1 +1,9 @@
 <% layout('./layouts/boilerplate') -%>
+<div class="row">
+    <div class="col-6 offset-3">
+        <h5>Pokemon Not Found</h5>
+        <form action="/pokemon/<%= pokename %>" method="POST">
+            <input type="submit" value="Add pokemon to database">
+        </form>
+    </div>
+</div>
