@@ -32,10 +32,10 @@ import pokemonModel from './models/pokemon.js';
 
 /// searching for pokemon:
 app.get('/pokemons/search', async (req, res) => {
-    console.log(req.query);
-    const pokemon = await pokemonModel.find({name : req.query.pokename});
-    console.log(pokemon.length);
-    res.send('hit the search route!!');
+    const { pokename } = req.query;
+    const pokemon = await pokemonModel.findOne({name : pokename});
+    res.redirect(`/pokemons/${pokemon._id}`);
+    // res.send('hit the search route!!');
 })
 
 app.get('/pokemons', async (req, res) => {
