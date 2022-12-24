@@ -29,13 +29,17 @@ db.once("open", () => {
 import pokemonModel from './models/pokemon.js';
 
 
-
 /// searching for pokemon:
 app.get('/pokemons/search', async (req, res) => {
-    const { pokename } = req.query;
+    let { pokename } = req.query;
+    pokename = pokename.toLowerCase()
     const pokemon = await pokemonModel.findOne({name : pokename});
-    res.redirect(`/pokemons/${pokemon._id}`);
-    // res.send('hit the search route!!');
+    if(pokemon){
+        res.redirect(`/pokemons/${pokemon._id}`);
+    }
+    else {
+        res.send('pokemon not found');
+    }
 })
 
 app.get('/pokemons', async (req, res) => {
