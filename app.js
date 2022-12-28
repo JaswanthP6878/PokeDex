@@ -30,6 +30,13 @@ db.once("open", () => {
 import pokemonModel from './models/pokemon.js';
 
 
+// home page:
+app.get('/', (req, res) => {
+    res.render('home');
+
+})
+
+
 /// searching for pokemon:
 app.get('/pokemons/search', async (req, res) => {
     let { pokename } = req.query;
