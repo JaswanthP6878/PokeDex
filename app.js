@@ -31,7 +31,6 @@ import user from './routes/user.js';
 // home page:
 app.get('/', (req, res) => {
     res.render('home');
-
 })
 
 app.use('/pokemons', pokemon);

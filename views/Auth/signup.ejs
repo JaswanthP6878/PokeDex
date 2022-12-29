@@ -1,8 +1,8 @@
 <% layout('./layouts/boilerplate') -%>
 <div class="row">
     <div class="col-6 offset-3">
-        <h3> Login </h3>
-        <form class = 'mt-4' action='/user/login', method = 'POST'>
+        <h3> Sign Up for the pokedex </h3>
+        <form class = 'mt-4' action='/user', method = 'POST'>
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input type="text" class="form-control" id="username" name = 'user[username]' >
@@ -11,7 +11,7 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" name = 'user[password]' >
             </div>
-            <button type="submit" class="btn btn-primary">login</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
 </div>
