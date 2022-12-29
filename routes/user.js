@@ -20,6 +20,9 @@ router.post('/login', async (req, res) => {
     const { user } = req.body;
     const Founduser = await User.findOne({username: user.username});
     if(Founduser.password === user.password){
+        req.session.userID = Founduser._id;
+        req.session.username = Founduser.username;
+        console.log(req.session);
         res.redirect('/pokemons');
     } else {
         res.send('access denied!');

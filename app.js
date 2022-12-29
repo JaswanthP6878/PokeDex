@@ -4,6 +4,7 @@ import path from 'path';
 import engine from 'ejs-mate';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import session from 'express-session';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -12,10 +13,25 @@ const app = express();
 import Pokedex from 'pokedex-promise-v2';
 const P = new Pokedex();
 
+// config
+const sessionConfig = {
+    secret : 'thisisasecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie : {
+        httpOnly: true,
+        expires : Date.now() + 1000*60*60*24*7,
+        maxAge : 1000*60*60*24*7
+    }
+}
+
+
+
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
+app.use(session(sessionConfig));
 
 mongoose.connect('mongodb://localhost:27017/pokedex', { useNewUrlParser: true, useUnifiedTopology: true });
 
