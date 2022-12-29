@@ -4,7 +4,6 @@ import path from 'path';
 import engine from 'ejs-mate';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import bodyParser from 'body-parser';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -16,8 +15,7 @@ const P = new Pokedex();
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }))
 
 mongoose.connect('mongodb://localhost:27017/pokedex', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -28,6 +26,7 @@ db.once("open", () => {
 })
 import pokemonModel from './models/pokemon.js';
 import pokemon from './routes/pokemons.js';
+import user from './routes/user.js';
 
 // home page:
 app.get('/', (req, res) => {
@@ -36,6 +35,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/pokemons', pokemon);
+app.use('/user', user);
 
 
 app.listen(3000,  () =>{
