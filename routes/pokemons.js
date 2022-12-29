@@ -8,7 +8,14 @@ import pokemonModel from '../models/pokemon.js';
 import Pokedex from 'pokedex-promise-v2';
 const P = new Pokedex();
 
-router.get('/search', async (req, res) => {
+const AuthUser = (req, res, next) => {
+    if(!req.session.userID){
+        return res.send('access denied! Login into the pokedex'); 
+    }
+    next();
+}
+
+router.get('/search', AuthUser ,async (req, res) => {
     let { pokename } = req.query;
     pokename = pokename.toLowerCase()
     const pokemon = await pokemonModel.findOne({name : pokename});
@@ -20,12 +27,12 @@ router.get('/search', async (req, res) => {
     }
 })
 
-router.get('/', async (req, res) => {
+router.get('/', AuthUser,  async (req, res) => {
     const data = await pokemonModel.find();
     res.render('index', { data });
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', AuthUser, async (req, res) => {
     const { id } =  req.params;
     const pokemon = await pokemonModel.findById(id);
     const pokeData = await P.getPokemonByName(pokemon.name);
@@ -34,7 +41,7 @@ router.get('/:id', async (req, res) => {
     // res.send(pokeData); testing the pokedata;
 })
 
-router.post('/:name', async (req, res) => {
+router.post('/:name', AuthUser,  async (req, res) => {
     try{
     const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.params.name}/`);
     const pokemon = await data.json();
