@@ -28,7 +28,7 @@ db.once("open", () => {
     console.log("Database Connected!");
 })
 import pokemonModel from './models/pokemon.js';
-
+import pokemon from './routes/pokemons.js';
 
 // home page:
 app.get('/', (req, res) => {
@@ -36,53 +36,54 @@ app.get('/', (req, res) => {
 
 })
 
+app.use('/pokemons', pokemon);
 
 /// searching for pokemon:
-app.get('/pokemons/search', async (req, res) => {
-    let { pokename } = req.query;
-    pokename = pokename.toLowerCase()
-    const pokemon = await pokemonModel.findOne({name : pokename});
-    if(pokemon){
-        res.redirect(`/pokemons/${pokemon._id}`);
-    }
-    else {
-        res.render('notFound', { pokename });
-    }
-})
+// app.get('/pokemons/search', async (req, res) => {
+//     let { pokename } = req.query;
+//     pokename = pokename.toLowerCase()
+//     const pokemon = await pokemonModel.findOne({name : pokename});
+//     if(pokemon){
+//         res.redirect(`/pokemons/${pokemon._id}`);
+//     }
+//     else {
+//         res.render('notFound', { pokename });
+//     }
+// })
 
-app.get('/pokemons', async (req, res) => {
-    const data = await pokemonModel.find();
-    res.render('index', { data });
-})
+// app.get('/pokemons', async (req, res) => {
+//     const data = await pokemonModel.find();
+//     res.render('index', { data });
+// })
 
-app.get('/pokemons/:id', async (req, res) => {
-    const { id } =  req.params;
-    const pokemon = await pokemonModel.findById(id);
-    const pokeData = await P.getPokemonByName(pokemon.name);
-    // console.log(pokeData);
-    res.render('show', { pokemon ,pokeData});
-    // res.send(pokeData); testing the pokedata;
-})
+// app.get('/pokemons/:id', async (req, res) => {
+//     const { id } =  req.params;
+//     const pokemon = await pokemonModel.findById(id);
+//     const pokeData = await P.getPokemonByName(pokemon.name);
+//     // console.log(pokeData);
+//     res.render('show', { pokemon ,pokeData});
+//     // res.send(pokeData); testing the pokedata;
+// })
 
-app.post('/pokemon/:name', async (req, res) => {
-    try{
-    const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.params.name}/`);
-    const pokemon = await data.json();
-    const {name, sprites, types } = pokemon;
-    const image = sprites.other.dream_world.front_default;
-    const p =  new pokemonModel({
-        name: name,
-        image: image,
-        types: types
-    })
-    const result = await p.save();
-    console.log(p);
-    res.send('added to database');
-    } catch(e) {
-        res.send('not found');
-    }   
+// app.post('/pokemon/:name', async (req, res) => {
+//     try{
+//     const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.params.name}/`);
+//     const pokemon = await data.json();
+//     const {name, sprites, types } = pokemon;
+//     const image = sprites.other.dream_world.front_default;
+//     const p =  new pokemonModel({
+//         name: name,
+//         image: image,
+//         types: types
+//     })
+//     const result = await p.save();
+//     console.log(p);
+//     res.send('added to database');
+//     } catch(e) {
+//         res.send('not found');
+//     }   
     
-})
+// })
 
 app.listen(3000,  () =>{
     console.log('listening at 3000!');
