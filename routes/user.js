@@ -28,4 +28,18 @@ router.post('/login', async (req, res) => {
         res.send('access denied!');
     }
 })
+
+router.get('/logout', (req, res) => {
+    console.log(res.locals);
+    req.session.destroy();
+    res.redirect('/');
+})
+
+
+router.get('/fake', (req, res) => {
+    res.render('test');
+})
+
+
+
 export default router;

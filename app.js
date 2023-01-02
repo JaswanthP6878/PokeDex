@@ -33,6 +33,13 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
 app.use(session(sessionConfig));
 
+app.use(function (req, res, next) {
+    if( req.session.userID ){
+        res.locals.currentUser = req.session.userID
+    }
+    next()
+  })
+
 mongoose.connect('mongodb://localhost:27017/pokedex', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
