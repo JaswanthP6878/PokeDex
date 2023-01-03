@@ -10,7 +10,8 @@ const P = new Pokedex();
 
 const AuthUser = (req, res, next) => {
     if(!req.session.userID){
-        return res.send('access denied! Login into the pokedex'); 
+        req.flash('error', 'Please login');
+        return res.redirect('/user/login');
     }
     next();
 }
