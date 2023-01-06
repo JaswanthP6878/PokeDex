@@ -1,3 +1,13 @@
 body{
     font-style: italic;
 }
+
+.stats {
+    display: inline-block;
+    align-items: center;
+
+}
+
+.moves{
+    margin-left: 50px;
+}
