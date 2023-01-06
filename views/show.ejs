@@ -1,8 +1,9 @@
 <% layout('./layouts/boilerplate') -%>
     <div class="row mt-4">
         <div class="col-3 ml-2 border-end">
-            <div style = "border-radius: 20px;" class="card">
-                <img style = "max-width: 200px; max-height: 200px; margin: auto;"src="<%= pokemon.image %>" class="card-img-top img-fluid" alt="pokemon image">
+            <div style="border-radius: 20px;" class="card">
+                <img style="max-width: 200px; max-height: 200px; margin: auto;" src="<%= pokemon.image %>"
+                    class="card-img-top img-fluid" alt="pokemon image">
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         <%= pokemon.name %>
@@ -26,23 +27,37 @@
             <div class="container">
                 <div class="row">
                     <div class="col-4 border text-center">
-                    Stats:
-                    <ul class = "list-group list-group-flush mt-1">
-                    <% for (let s of pokeData.stats) { %> 
-                       
-                            <li class =" list-group-item"><span><%= s.stat.name %> : <%= s.base_stat %> </span></li>
-                        
-                        <% } %> 
-                    </ul>
+                        Stats:
+                        <ul class="list-group list-group-flush mt-1">
+                            <% for (let s of pokeData.stats) { %>
+
+                                <li class=" list-group-item"><span>
+                                        <%= s.stat.name %> : <%= s.base_stat %>
+                                    </span></li>
+
+                                <% } %>
+                        </ul>
                     </div>
-                    <div class="col-6">....<br>......</div>
-                  </div>
+                    <div class="col-6 border ml-5">
+                        Moves:
+                        <ul class="list-group list-group-flush mt-1">
+                            <% for (let data of pokeData.abilities) { %>
+
+                                <li class=" list-group-item"><span>
+                                        <%= data.ability.name %>
+                                    </span></li>
+
+                                <% } %>
+                        </ul>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="row" style="margin-top: 20px;">
         <div class="col-6 offset-3 text-center">
-            <span><a class = "btn btn-danger" href="/pokemons"> back to home page</a></span>
+            <span><a class="btn btn-danger" href="/pokemons"> back to home page</a></span>
         </div>
     </div>

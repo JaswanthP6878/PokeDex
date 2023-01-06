@@ -37,7 +37,7 @@ router.get('/:id', AuthUser, async (req, res) => {
     const { id } =  req.params;
     const pokemon = await pokemonModel.findById(id);
     const pokeData = await P.getPokemonByName(pokemon.name);
-    // console.log(pokeData);
+    console.log(pokeData.abilities);
     res.render('show', { pokemon ,pokeData});
     // res.send(pokeData); testing the pokedata;
 })
