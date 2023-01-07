@@ -1,10 +1,20 @@
-<nav class="navbar  navbar-light bg-danger text-white">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white" href="/pokemons">PokeDexTest</a>
-        <form action = '/pokemons/search' method = "get" class="d-flex">
-          <input  name = "pokename" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-danger" type="submit">Search</button>
-        </form>
-      </div>
+<nav class="navbar navbar-light bg-danger text-white">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/pokemons">PokeDexTest</a>
+    <!-- drop down menu Not working Check once again-->
+    <div class="collapse navbar-collapse profile" id="navbarNavDropdown">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Dropdown link
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </li>
     </div>
-  </nav>
+  </div>
+  </div>
+</nav>
